@@ -64,6 +64,17 @@ def assembleVerticals(verticals):
 
     return assembled_verticals
 
+def create_slideshows(list):
+    slideshow =[]
+    currentslide = list[0]
+    while len(list) != 0:
+        slideshow.append(currentslide)
+        index =list.index(currentslide)
+        list.remove(currentslide)
+        nextslides = find_next(index,currentslide, list)
+        nextslide= sort_pictures(nextslides)[0]
+        currentslide = nextslide
 
+    return slideshow
 
 
