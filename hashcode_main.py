@@ -13,6 +13,15 @@ verticals = [(1, 'V', 2, 'bla', 'blad'),
 # Assemble verticals into single slides in a way that maximizes the number of unique tags per slide
 # and averages out the number of tags per slide.
 
+def interest_factor(slide1, slide2):
+    tags1 = getTags(slide1)
+    tags2 = getTags(slide2)
+    unique_tags1 = tags1  - tags2
+    unique_tags2 = tags2  - tags1
+    common_tags = tags1  & tags2
+    return min(len(unique_tags1), len(unique_tags2), len(common_tags))
+
+
 def getTags(picture):
     result = set()
     for tag in picture[3:]:
@@ -64,17 +73,35 @@ def assembleVerticals(verticals):
 
     return assembled_verticals
 
-def create_slideshows(list):
-    slideshow =[]
-    currentslide = list[0]
-    while len(list) != 0:
-        slideshow.append(currentslide)
-        index =list.index(currentslide)
-        list.remove(currentslide)
-        nextslides = find_next(index,currentslide, list)
-        nextslide= sort_pictures(nextslides)[0]
-        currentslide = nextslide
 
-    return slideshow
+# returns optimal following slide to given slide from slideset sorted_slides.
+# search whithin limited range.
+# Assume the given slide is not in the list of sorted slides.
 
+def find_best_next(slide, index, sorted_slides):
+
+    search_range = len(sorted_slides) // COMPARE_CONST
+    if search_range == 0:
+        search_range = 1
+    index = min(max(0, index - (search_range//2 + 1)), len(sorted_slides) - (search_range//2 + 1))
+    best_score = 0
+    best_next = []
+
+    for i in range(0, search_range):
+
+        to_compare = sorted_slides[index]
+        score = interest_factor(slide, to_compare)
+
+        if score > best_score:
+            best_next = []
+            best_next.append(to_compare)
+            best_score = score
+        elif (score == best_score):
+            best_next.append(to_compare)
+
+        index += 1
+
+    return best_next
+
+print(find_best_next(verticals[0], 0, verticals[1:]))
 
