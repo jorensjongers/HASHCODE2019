@@ -1,5 +1,5 @@
 # ik wil geen parser file
-
+from collections import OrderedDict
 from operator import itemgetter
 
 COMPARE_CONST = 100
@@ -110,19 +110,15 @@ def find_best_next(slide, index, sorted_slides):
 def create_slideshows(list):
     slideshow =[]
     currentslide = list[0]
-    i = 0
     while len(list) != 1:
         slideshow.append(currentslide)
         index =list.index(currentslide)
         list.remove(currentslide)
         nextslides = find_best_next(currentslide,index, list)
         if nextslides == []:
-            slideshow.append(list[0])
             nextslide = list[0]
         else:
             nextslide= sort_pictures(nextslides)[0]
         currentslide = nextslide
-        i+= 1
-    slideshow.append(list[0])
     return slideshow
 

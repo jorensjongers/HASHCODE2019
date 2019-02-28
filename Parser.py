@@ -1,7 +1,7 @@
 import numpy as np
 import hashcode_main as m
 
-f = open("c_memorable_moments.txt", "r")
+f = open("e_shiny_selfies.txt", "r")
 H = []
 V = []
 
@@ -44,7 +44,7 @@ def sortLists(list):
 #--------------------------------------
 
 def output(slideshow):
-    submission= open("submission_memerable_moments.txt","w+")
+    submission= open("submission_selfies.txt","w+")
     c = len(slideshow)
     submission.write("%d \n" % c)
     for i in range(0,c):
