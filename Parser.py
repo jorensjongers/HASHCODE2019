@@ -44,7 +44,7 @@ def sortLists(list):
 #--------------------------------------
 
 def output(slideshow):
-    submission= open("submission_memerable_moments.txt.txt","w+")
+    submission= open("submission_memerable_moments.txt","w+")
     c = len(slideshow)
     submission.write("%d \n" % c)
     for i in range(0,c):
@@ -60,4 +60,5 @@ n = getNumber(l)
 sortLists(l)
 test =[[1,"a"],[[1,2],"b"]]
 V_assembled = m.assembleVerticals(V)
-output(H+V_assembled)
+final_show = m.create_slideshows(H+V_assembled)
+output(final_show)
