@@ -16,7 +16,7 @@ def getNumberOfPhotos(list):
 
 def sortLists(list):
     for i in range(0,len(list)):
-        tup = tuple(int(i)) + tuple(list[i])
+        tup = [i] + list[i]
         if list[i][0] == 'H':
             H.append(tup)
         elif list[i][0] == 'V':
@@ -25,6 +25,11 @@ def sortLists(list):
 
 
 
+
 l = parse_input(f)
 n = getNumberOfPhotos(l)
-print(l)
+sortLists(l)
+print('h:')
+print(H)
+print('v:')
+print(V)
