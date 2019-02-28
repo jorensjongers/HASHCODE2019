@@ -31,6 +31,8 @@ def makeSlide(pic1, pic2, unionTags):
     slide.append(unionTags)
     return slide
 
+def sort_pictures(pictures):
+    return sorted(pictures, key=itemgetter(2))
 
 def assembleVerticals(verticals):
 
@@ -61,6 +63,7 @@ def assembleVerticals(verticals):
                 i = 0
 
     return assembled_verticals
+
 
 
 
