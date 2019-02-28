@@ -1,42 +1,30 @@
 import numpy as np
 
-
-
-
-file = open("a_example.in", "r")
-
+f = open("a_example.txt", "r")
+H = []
+V = []
 
 def parse_input(file):
     list = [line.split(' ') for line in file.read().split('\n')]
-    print(list)
     return list
 
 
-def getNumberOfRows(list):
-    return int(list[0][0])
+def getNumberOfPhotos(list):
+    number = int((list.pop(0))[0])
+    return number
 
 
-def getNumberOfCollumnz(list):
-    return int(list[0][1])
+def sortLists(list):
+    for i in range(0,len(list)):
+        tup = tuple(int(i)) + tuple(list[i])
+        if list[i][0] == 'H':
+            H.append(tup)
+        elif list[i][0] == 'V':
+            V.append(tup)
 
 
-def getMinIngredients(list):
-    return int(list[0][2])
 
 
-def getMaxCells(list):
-    return int(list[0][3])
-
-
-def getPizza(list):
-    result = []
-    for row in list[1:-1]:
-        r = []
-        for i in range(0, getNumberOfCollumnz(list)):
-            r.append(row[0][i])
-        result.append(r)
-    return result
-
-
-list = parse_input(file)
-print(getPizza(list))
+l = parse_input(f)
+n = getNumberOfPhotos(l)
+print(l)
